@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-
+using ICT4Rails_ASP.Enumerations;
 
 
 namespace Proftaak_test
@@ -12,27 +14,64 @@ namespace Proftaak_test
         public List<Employee> GetAllEmployees()
         {
             List<Employee> returnEmployees = new List<Employee>();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT M.ID, M.VOORNAAM, M.ACHTERNAAM, M.TELEFOONNUMMER, M.BANKREKENINGNUMMER, M.GEBRUIKERSNAAM, M.WACHTWOORD, F.ID, F.NAAM, R.OMSCHRIJVING FROM MEDEWERKER M JOIN FUNCTIE F ON F.ID = M.FUNCTIE_ID JOIN FUNCTIE_RECHT FR ON FR.FUNCTIE_ID = F.ID JOIN RECHT R ON FR.RECHT_ID = R.ID";
-            using (DatabaseManager.Connector)
+            
+            string query = "SELECT M.ID, M.VOORNAAM, M.ACHTERNAAM, M.TELEFOONNUMMER, M.BANKREKENINGNUMMER, M.GEBRUIKERSNAAM, M.WACHTWOORD, F.ID, F.NAAM FROM MEDEWERKER M JOIN FUNCTIE F ON F.ID = M.FUNCTIE_ID";
+            using (SqlConnection connection = DatabaseManager.Connection)
             {
-                DatabaseManager.Connector.Open();
-                using (DbDataReader reader = DatabaseManager.Connector.Query(cmd))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    while (reader.Read())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        int employeeID = reader.GetInt32(0);
-                        string surname = reader.GetString(1);
-                        string lastname = reader.GetString(2);
-                        string phonenumber = reader.GetString(3);
-                        string banknumber = reader.GetString(4);
-                        string username = reader.GetString(5);
-                        string password = reader.GetString(6);
-                        string functionID = re
+                        while (reader.Read())
+                        {
+                            int employeeID = Convert.ToInt32(reader.GetDecimal(0));
+                            string surname = reader.GetString(1);
+                            string lastname = reader.GetString(2);
+                            string phonenumber = reader.GetString(3);
+                            string banknumber = reader.GetString(4);
+                            string username = reader.GetString(5);
+                            string password = reader.GetString(6);
+                            int functionID = Convert.ToInt32(reader.GetDecimal(7));
+                            string functionName = reader.GetString(8);
+                           
+                            Employee newEmployee = new Employee(employeeID, lastname, surname, username, password,
+                                new Function(functionID, functionName, Rights.CreateUser),
+                                phonenumber, banknumber);
+                            returnEmployees.Add(newEmployee);
+                        }
                     }
                 }
             }
                 return returnEmployees;
+        }
+
+        public bool Create(Employee employee)
+        {
+            string query = "INSERT INTO MEDEWERKER(Functie_ID, Voornaam, Achternaam, Telefoonnummer, Bankrekeningnummer, Gebruikersnaam, Wachtwoord) VALUES(1, @Surname, @name, @Phonenumber, @Banknumber, @Username, @Password)";
+            using (SqlConnection connection = DatabaseManager.Connection)
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Surname", employee.SurName);
+                    command.Parameters.AddWithValue("@name", employee.Name);
+                    command.Parameters.AddWithValue("@Phonenumber", employee.TelephoneNumber);
+                    command.Parameters.AddWithValue("@Banknumber", employee.BankNumber);
+                    command.Parameters.AddWithValue("@Username", employee.UserName);
+                    command.Parameters.AddWithValue("@Password", employee.Password);
+                    
+                    try
+                    {
+                        command.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+
+                }
+            }
+            return true;
         }
     }
 }

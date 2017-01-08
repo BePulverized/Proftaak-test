@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
 namespace Proftaak_test
 {
-    static class DatabaseManager
+    public class DatabaseManager
     {
-        public static IDatabaseConnector Connector { get; set; }
+        private static readonly string connectionString = "Server=tcp:rails.database.windows.net,1433;Initial Catalog=railsDB;Persist Security Info=False;User ID=railRunner;Password=swasennard42!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        
 
-        public static string ConnectionString { get; set; }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        static DatabaseManager()
+        public static SqlConnection Connection
         {
-
-            Connector = new MSSQLConnector(ConfigurationManager.ConnectionStrings["Azure"].ConnectionString);
+            get
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                return connection;
+            }
         }
     }
 }

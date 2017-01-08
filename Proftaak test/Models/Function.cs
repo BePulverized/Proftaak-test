@@ -12,5 +12,12 @@ namespace Proftaak_test
         public string Name { get; set; }
         public Rights Rights { get; set; }
 
+        public Function(int id, string name, Rights rights)
+        {
+            ID = id;
+            Name = name;
+            Rights = rights;
+        }
+
     }
 }

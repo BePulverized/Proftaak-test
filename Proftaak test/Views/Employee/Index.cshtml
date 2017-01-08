@@ -1,0 +1,84 @@
+﻿@using System.Web.Optimization
+@using ICT4Rails_ASP.Enumerations
+@using Proftaak_test.Controllers
+@model Proftaak_test.Controllers.EmployeeController.employeeViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class="employeelist">
+    <h2>Employees</h2>
+    <ul>
+        @foreach (var item in Model.employeeList)
+        {
+            <li>@item.Name</li>
+        }
+
+    </ul>
+</div>
+
+@using (Html.BeginForm("Create", "Employee",FormMethod.Post, new {@class = "CreateForm"}))
+{
+    <h2>Medewerker toevoegen:</h2>
+    @Html.Label("Naam: ")
+    @Html.TextBoxFor(m => m.employee.Name, new {style = "width:200%"})
+    @Html.ValidationMessageFor(m => m.employee.Name)
+    @Html.Label("Achternaam: ")
+    @Html.TextBoxFor(m => m.employee.SurName, new {style = "width:200%"})
+    @Html.ValidationMessageFor(m => m.employee.SurName)
+    @Html.Label("Gebruikersnaam: ")
+    @Html.TextBoxFor(m => m.employee.UserName, new {style = "width:200%"})
+    @Html.ValidationMessageFor(m => m.employee.UserName)
+    @Html.Label("Wachtwoord: ")
+    @Html.TextBoxFor(m => m.employee.Password, new {style = "width:200%"})
+    @Html.ValidationMessageFor(m => m.employee.Password)
+    @Html.Label("Functie: ")
+    @Html.DropDownList("Functions", new SelectList(Model.functions, "Id", "Name"), new {style="margin-bottom: 20px"})
+    @Html.ValidationMessageFor(m => m.employee.Function.Name)
+    @Html.Label("Telefoonnummer: ")
+    @Html.TextBoxFor(m => m.employee.TelephoneNumber, new {style = "width:200%"})
+    @Html.ValidationMessageFor(m => m.employee.TelephoneNumber)
+    @Html.Label("Banknummer: ")
+    @Html.TextBoxFor(m => m.employee.BankNumber, new {style = "width:200%"})
+    @Html.ValidationMessageFor(m => m.employee.BankNumber)
+
+
+    <input type="submit" value="Toevoegen"/>
+}
+
+@using (Html.BeginForm("Update", "Employee", FormMethod.Post, new {@class = "UpdateForm"}))
+{
+    <h2>Medewerker aanpassen:</h2>
+    @Html.Label("Naam: ")
+    @Html.TextBoxFor(m => m.employee.Name, new {style = "width:200%"})
+    @Html.Label("Achternaam: ")
+    @Html.TextBoxFor(m => m.employee.SurName, new {style = "width:200%"})
+    @Html.Label("Gebruikersnaam: ")
+    @Html.TextBoxFor(m => m.employee.UserName, new {style = "width:200%"})
+    @Html.Label("Wachtwoord: ")
+    @Html.TextBoxFor(m => m.employee.Password, new {style = "width:200%"})
+    @Html.Label("Functie: ")
+    @Html.DropDownList("Functions", new SelectList(Model.functions, "Id", "Name"), new { style = "margin-bottom: 20px" })
+    @Html.Label("Telefoonnummer: ")
+    @Html.TextBoxFor(m => m.employee.TelephoneNumber, new {style = "width:200%"})
+    @Html.Label("Banknummer: ")
+    @Html.TextBoxFor(m => m.employee.BankNumber, new {style = "width:200%"})
+
+
+    <input type="submit" value="Submit"/>
+}
+
+</body>
+</html>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
