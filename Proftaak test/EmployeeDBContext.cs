@@ -45,6 +45,40 @@ namespace Proftaak_test
                 return returnEmployees;
         }
 
+        public Employee EmployeeByUsername(string _username) {
+            Employee newEmployee = new Employee();
+            string query = "SELECT M.ID, M.VOORNAAM, M.ACHTERNAAM, M.TELEFOONNUMMER, M.BANKREKENINGNUMMER, M.GEBRUIKERSNAAM, M.WACHTWOORD, F.ID, F.NAAM FROM MEDEWERKER M JOIN FUNCTIE F ON F.ID = M.FUNCTIE_ID WHERE M.GEBRUIKERSNAAM = @username";
+            using (SqlConnection connection = DatabaseManager.Connection) {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", _username);
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        while (reader.Read()) {
+                            int employeeID = Convert.ToInt32(reader.GetDecimal(0));
+                            string surname = reader.GetString(1);
+                            string lastname = reader.GetString(2);
+                            string phonenumber = reader.GetString(3);
+                            string banknumber = reader.GetString(4);
+                            string username = reader.GetString(5);
+                            string password = reader.GetString(6);
+                            int functionID = Convert.ToInt32(reader.GetDecimal(7));
+                            string functionName = reader.GetString(8);
+
+                            newEmployee.ID = employeeID;
+                            newEmployee.LastName = lastname;
+                            newEmployee.SurName = surname;
+                            newEmployee.UserName = username;
+                            newEmployee.Password = password;
+                            newEmployee.Function = new Function(functionID, functionName, Rights.CreateUser);
+                            newEmployee.TelephoneNumber = phonenumber;
+                            newEmployee.BankNumber = banknumber;
+                        }
+                    }
+                }
+            }
+            return newEmployee;
+        }
+
         public bool Create(Employee employee)
         {
             string query = "INSERT INTO MEDEWERKER(Functie_ID, Voornaam, Achternaam, Telefoonnummer, Bankrekeningnummer, Gebruikersnaam, Wachtwoord) VALUES(1, @Surname, @name, @Phonenumber, @Banknumber, @Username, @Password)";
@@ -72,6 +106,34 @@ namespace Proftaak_test
                 }
             }
             return true;
+        }
+
+
+        public bool Login(string _username, string _password)
+        {
+            string query = "SELECT M.Gebruikersnaam, M.Wachtwoord FROM [dbo].[MEDEWERKER] M WHERE M.Gebruikersnaam = @username AND M.Wachtwoord = @password";
+            using (SqlConnection connection = DatabaseManager.Connection) {
+                using (SqlCommand command = new SqlCommand(query, connection)) {
+                    command.Parameters.AddWithValue("@username", _username);
+                    command.Parameters.AddWithValue("@password", _password);
+                    try
+                    {                    
+                        if (command.ExecuteReader().HasRows)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        return false;
+                    }
+
+                }
+            }
         }
     }
 }

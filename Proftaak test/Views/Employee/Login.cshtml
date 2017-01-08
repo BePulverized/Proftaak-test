@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/_Layout.cshtml";
+    ViewBag.Title = "Inloggen";
+}
+
+<!-- START BODY -->
+<!-- begin content -->
+<br/>
+<br />
+<br/>
+<br/>
+<div class="content">
+    <!-- begin container -->
+    <div class="container">
+        <form action="/Employee/Login" method="post">
+            <div class="form-group">
+                <label for="username">Gebruikersnaam</label>
+                <input type="text" name="username" class="form-control" id="username" placeholder="Gebruikersnaam">
+            </div>
+            <div class="form-group">
+                <label for="password">Wachtwoord</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Wachtwoord">
+            </div>
+            <br />
+            <button type="submit" class="btn btn-theme">Login <i class="fa fa-sign-in"></i></button>
+        </form>
+        <!-- end panel-forum -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end content -->
