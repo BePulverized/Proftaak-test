@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using ICT4Rails_ASP.Enumerations;
+
 
 
 namespace Proftaak_test

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
-using ICT4Rails_ASP.Enumerations;
 using Proftaak_test.Repository;
 
 namespace Proftaak_test.Controllers

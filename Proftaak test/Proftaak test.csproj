@@ -144,6 +144,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\LaneController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\TramController.cs" />
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Function.cs" />
@@ -151,6 +155,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IDatabaseConnector.cs" />
+    <Compile Include="Models\LIJN.cs" />
+    <Compile Include="Models\REMISE.cs" />
+    <Compile Include="Models\RESERVERING.cs" />
+    <Compile Include="Models\SECTOR.cs" />
+    <Compile Include="Models\SPOOR.cs" />
+    <Compile Include="Models\TRAM.cs" />
+    <Compile Include="Models\TRAMTYPE.cs" />
+    <Compile Include="Models\TRAM_LIJN.cs" />
+    <Compile Include="Models\TRAM_ONDERHOUD.cs" />
+    <Compile Include="Models\VERBINDING.cs" />
     <Compile Include="MSSQLConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Rights.cs" />
@@ -168,6 +182,10 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\Employee\Succes.cshtml" />
+    <Content Include="Views\Tram\Index.cshtml" />
+    <Content Include="Views\Lane\Index.cshtml" />
+    <Content Include="Views\Maintenance\Index.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
