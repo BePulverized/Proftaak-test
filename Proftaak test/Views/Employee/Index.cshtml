@@ -18,7 +18,7 @@
     <ul>
         @foreach (var item in Model.employeeList)
         {
-            <li>@item.Name</li>
+            <li>@Html.ActionLink(@item.Name, "Index", new {id = item.ID}, new {style="font-size:12px"})</li>
         }
 
     </ul>
@@ -28,7 +28,7 @@
 {
     <h2>Medewerker toevoegen:</h2>
     @Html.Label("Naam: ")
-    @Html.TextBoxFor(m => m.employee.Name, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.employee.Name,"hoi", new {style = "width:200%"})
     @Html.ValidationMessageFor(m => m.employee.Name)
     @Html.Label("Achternaam: ")
     @Html.TextBoxFor(m => m.employee.SurName, new {style = "width:200%"})
@@ -46,7 +46,7 @@
     @Html.TextBoxFor(m => m.employee.TelephoneNumber, new {style = "width:200%"})
     @Html.ValidationMessageFor(m => m.employee.TelephoneNumber)
     @Html.Label("Banknummer: ")
-    @Html.TextBoxFor(m => m.employee.BankNumber, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.employee.BankNumber, new {style = "width:200%; margin-bottom:10px;"})
     @Html.ValidationMessageFor(m => m.employee.BankNumber)
 
 
@@ -57,22 +57,22 @@
 {
     <h2>Medewerker aanpassen:</h2>
     @Html.Label("Naam: ")
-    @Html.TextBoxFor(m => m.employee.Name, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.editemployee.Name, new {style = "width:200%"})
     @Html.Label("Achternaam: ")
-    @Html.TextBoxFor(m => m.employee.SurName, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.editemployee.SurName, new {style = "width:200%"})
     @Html.Label("Gebruikersnaam: ")
-    @Html.TextBoxFor(m => m.employee.UserName, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.editemployee.UserName, new {style = "width:200%"})
     @Html.Label("Wachtwoord: ")
-    @Html.TextBoxFor(m => m.employee.Password, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.editemployee.Password, new {style = "width:200%"})
     @Html.Label("Functie: ")
     @Html.DropDownList("Functions", new SelectList(Model.functions, "Id", "Name"), new { style = "margin-bottom: 20px" })
     @Html.Label("Telefoonnummer: ")
-    @Html.TextBoxFor(m => m.employee.TelephoneNumber, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.editemployee.TelephoneNumber, new {style = "width:200%"})
     @Html.Label("Banknummer: ")
-    @Html.TextBoxFor(m => m.employee.BankNumber, new {style = "width:200%"})
+    @Html.TextBoxFor(m => m.editemployee.BankNumber, new {style = "width:200%; margin-bottom:10px;"})
+    @Html.HiddenFor(m => m.editemployee.ID)
 
-
-    <input type="submit" value="Submit"/>
+    <input type="submit" value="Aanpassen"/>
 }
 
 </body>

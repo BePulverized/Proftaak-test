@@ -13,18 +13,28 @@ namespace Proftaak_test.Controllers
     {
         private EmployeeRepo empRepo = new EmployeeRepo(new EmployeeDBContext());
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             employeeViewModel viewmodel = new employeeViewModel();
             viewmodel.employeeList = empRepo.GetAllEmployees();
+            //viewmodel.employee = empRepo
+            if (id != null)
+            {
+                viewmodel.editemployee = empRepo.GetEmployeebyID(Convert.ToInt32(id));
+                return View(viewmodel);
+            }
+            
             return View(viewmodel);
         }
+
+        
 
         public class employeeViewModel
         {
             
             public List<Employee> employeeList { get; set; }
             public Employee employee { get; set; }
+            public Employee editemployee { get; set; }
 
             public List<Function> functions = new List<Function>()
             {
@@ -55,8 +65,12 @@ namespace Proftaak_test.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Employee employee)
+        public ActionResult Update(Employee editemployee)
         {
+            if (ModelState.IsValid)
+            {
+                empRepo.Update(editemployee);
+            }
             return RedirectToAction("Index");
         }
     }

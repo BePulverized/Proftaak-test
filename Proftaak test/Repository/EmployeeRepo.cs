@@ -23,5 +23,15 @@ namespace Proftaak_test.Repository
         {
             return context.Create(employee);
         }
+
+        public Employee GetEmployeebyID(int id)
+        {
+            return context.GetAllEmployeeById(id);
+        }
+
+        public bool Update(Employee employee)
+        {
+            return context.Update(employee);
+        }
     }
 }
