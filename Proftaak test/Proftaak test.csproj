@@ -190,7 +190,7 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\Employee\Succes.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Employee\Login.cshtml" />
@@ -198,12 +198,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
-=======
+
     <Content Include="Views\Tram\Index.cshtml" />
     <Content Include="Views\Lane\Index.cshtml" />
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
->>>>>>> c383dc959042eed1c9e53bdd3434f3f8682d9f40
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
