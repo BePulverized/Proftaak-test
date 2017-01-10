@@ -88,7 +88,7 @@ namespace Proftaak_test.Controllers
                     Session["curEmployeeID"] = curEmployee.ID;
 
                     //TODO: Fix link below
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Employee");
                 }
                 else {
                     return RedirectToAction("Login", "Employee");

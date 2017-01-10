@@ -172,5 +172,32 @@ namespace Proftaak_test
             }
             return true;
         }
+
+        public bool Login(string _username, string _password)
+         {
+            string query = "SELECT M.Gebruikersnaam, M.Wachtwoord FROM [dbo].[MEDEWERKER] M WHERE M.Gebruikersnaam = @username AND M.Wachtwoord = @password";
+            using (SqlConnection connection = DatabaseManager.Connection) {
+                 using (SqlCommand command = new SqlCommand(query, connection)) {
+                     command.Parameters.AddWithValue("@username", _username);
+                     command.Parameters.AddWithValue("@password", _password);
+                     try
+                     {                    
+                         if (command.ExecuteReader().HasRows)
+                         {
+                             return true;
+                         }
+                         else
+                         {
+                             return false;
+                         }
+                     }
+                     catch (SqlException ex)
+                     {
+                         return false;
+                     }
+ 
+                }
+             }
+         }
     }
 }
