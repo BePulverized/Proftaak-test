@@ -33,5 +33,15 @@ namespace Proftaak_test.Repository
         {
             return context.Update(employee);
         }
+
+        public bool Login(string _username, string _password)
+        {
+            return context.Login(_username, _password);
+        }
+
+        public Employee EmployeeByUsername(string _username)
+        {
+            return context.EmployeeByUsername(_username);
+        }
     }
 }

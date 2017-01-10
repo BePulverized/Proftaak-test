@@ -73,5 +73,35 @@ namespace Proftaak_test.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection formCollection)
+        {
+            try {
+                string username = Request.Form["username"];
+                string password = Request.Form["password"];
+
+                if (empRepo.Login(username, password)) {
+                    Employee curEmployee = new Employee();
+                    curEmployee = empRepo.EmployeeByUsername(username);
+
+                    Session["curEmployeeID"] = curEmployee.ID;
+
+                    //TODO: Fix link below
+                    return RedirectToAction("Index", "Home");
+                }
+                else {
+                    return RedirectToAction("Login", "Employee");
+                }
+            }
+            catch {
+                return View();
+            }
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }
