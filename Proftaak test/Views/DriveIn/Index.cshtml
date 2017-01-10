@@ -1,0 +1,45 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>In/Uitrij</title>
+</head>
+<body>
+    <div class="TramInfo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Tram_logo_Basel.png/674px-Tram_logo_Basel.png" width="100px" height="70px" />
+
+        @using (Html.BeginForm("GetSectorForTram", "DriveIn", FormMethod.Post, new { @class = "TramInsert" }))
+        {
+
+            @Html.TextBox("Tram 2020", "", new { style = "width:100%" })
+
+            <input type="submit" value="Info" />
+        }
+
+    </div>
+    <div class="SpoorInfo">
+        <img src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/rounded-glossy-black-icons-signs/095437-rounded-glossy-black-icon-signs-railroad-tracks.png" width="100px" height="100px" />
+        <div class="SpoorInfoText">
+            <p>SPOOR 20</p>
+        </div>
+    </div>
+    <div class="SectorInfo">
+        <img src="https://cdn0.iconfinder.com/data/icons/huge-basic-icons-part-2/512/Radar.png" width="100px" height="80px" />
+        <div class="SectorInfoText">
+            <p>SECTOR 3</p>
+        </div>
+    </div>
+</body>
+</html>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
