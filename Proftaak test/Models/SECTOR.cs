@@ -16,5 +16,12 @@ namespace Proftaak_test
         public virtual List<Verbinding> Verbindingen1 { get; set; }
         public virtual Spoor Spoor { get; set; }
         public virtual Tram Tram { get; set; }
+
+        public Sector(decimal? nummer, Spoor spoor, Tram tram)
+        {
+            Spoor = spoor;
+            Tram = tram;
+            Nummer = nummer;
+        }
     }
 }

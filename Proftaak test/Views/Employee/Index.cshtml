@@ -18,10 +18,11 @@
     <ul>
         @foreach (var item in Model.employeeList)
         {
-            <li>@Html.ActionLink(@item.Name, "Index", new {id = item.ID}, new {style="font-size:12px"})</li>
+            <li>@Html.ActionLink(@item.Name, "Index", new {id = item.ID}, new {style = "font-size:12px"})</li>
         }
 
     </ul>
+    <p>Klik op een medewerker om deze aan te passen</p>
 </div>
 
 @using (Html.BeginForm("Create", "Employee",FormMethod.Post, new {@class = "CreateForm"}))

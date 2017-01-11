@@ -6847,11 +6847,18 @@ td.visible-print {
     
 }
 
+.employeelist p {
+    font: 200 12px/1.5 Helvetica, Verdana, sans-serif;
+    font-style: italic;
+    color: #5e5e5e;
+    margin-bottom: -50px;
+}
+
 .CreateForm {
     width: 30%;
     padding: 12px 20px;
     padding-right: 170px;
-    margin-top: -120px;
+    margin-top: -150px;
     margin-left: 250px;
     display: inline-block;
     border: 1px solid #ccc;
@@ -6927,10 +6934,10 @@ td.visible-print {
     width: 20%;
     background-color: #3276b1;
     color: white;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     padding-right: 40px;
-    margin-left: 185px;
+    margin-left: 230px;
     margin-top: -50px;
     border: none;
     border-radius: 4px;
@@ -6978,3 +6985,19 @@ td.visible-print {
 .SectorInfo img {
     margin-bottom: 10px;
 }
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>

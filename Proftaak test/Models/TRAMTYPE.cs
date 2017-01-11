@@ -7,5 +7,12 @@ namespace Proftaak_test
         public decimal Id { get; set; }
         public string Omschrijving { get; set; }
         public virtual List<Tram> TraMs { get; set; }
+
+        public Tramtype(decimal id, string omschrijving)
+        {
+            Id = id;
+            Omschrijving = omschrijving;
+            
+        }
     }
 }
