@@ -155,6 +155,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\LaneController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="DatabaseManager.cs" />
@@ -202,6 +203,7 @@
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\DriveIn\Index.cshtml" />
+    <Content Include="Views\Maps\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
