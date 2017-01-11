@@ -30,6 +30,7 @@ namespace Proftaak_test
                             Tram tram = null;
                             if (!reader.IsDBNull(2))
                             {
+                                //Why use decimals? They're only INTS i guess
                                 decimal tramid = reader.GetDecimal(2);
                                 decimal tramnummer = reader.GetDecimal(3);
                                 decimal tramtypeid = reader.GetDecimal(4);
