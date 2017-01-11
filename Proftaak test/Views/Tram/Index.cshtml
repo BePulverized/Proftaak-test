@@ -1,4 +1,4 @@
-﻿
+﻿@model Proftaak_test.Controllers.TramController.SectorViewModel
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
@@ -11,33 +11,25 @@
     <title>Trams</title>
 </head>
 <body>
-<div id="map_canvas" style="width: 640px; height: 880px;">
+<div class="trambeheer">
+@foreach (var item in @Model.SpoorList)
+{
+    <div class="Spoor">
+        <button type="button">@item.Nummer</button>
     </div>
+    foreach (Sector sector in @Model.SectorList)
+    {
+        if (sector.SpoorId == item.Id)
+        {
+            <div>
+                <button type="button">@sector.Nummer</button>
+            </div>
+        }
+    }
+}
+</div>
 </body>
 </html>
 
 
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-
-   $(document).ready(function () {
-     initialize();
-   });
-   function initialize() {
-     var mapOptions = {
-       center: new google.maps.LatLng(6.9167, 79.8473),
-       zoom: 10,
-       mapTypeId: google.maps.MapTypeId.ROADMAP
-     };
-     var map = new google.maps.Map(document.getElementById("map_canvas"),
-       mapOptions);
-     // create a marker
-     var latlng = new google.maps.LatLng(6.9167, 79.8473);
-     var marker = new google.maps.Marker({
-       position: latlng,
-       map: map,
-       title: 'My Place'
-     });
-   }
-</script>  

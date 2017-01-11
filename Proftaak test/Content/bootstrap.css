@@ -6976,6 +6976,16 @@ td.visible-print {
     box-sizing: border-box;
 }
 
+.trambeheer {
+    margin-top: 100px;
+}
+
+.Spoor {
+    margin: 40, 40;
+    float: left;
+    
+}
+
 .SectorInfo .SectorInfoText {
     font: 400 30px/1.5 Helvetica, Verdana, sans-serif;
     margin-left: 200px;

@@ -163,6 +163,10 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="Repository\SpoorRepo.cs" />
+    <Compile Include="SpoorDBContext.cs" />
+    <Compile Include="SectorDBContext.cs" />
+    <Compile Include="Repository\SectorRepo.cs" />
     <Compile Include="Contexts\IMaintenanceContext.cs" />
     <Compile Include="Contexts\MaintenanceDbContext.cs" />
     <Compile Include="Contexts\MaintenanceMemoryContext.cs" />
