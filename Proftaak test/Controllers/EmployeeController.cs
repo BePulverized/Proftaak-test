@@ -15,16 +15,22 @@ namespace Proftaak_test.Controllers
         // GET: Employee
         public ActionResult Index(int? id)
         {
-            employeeViewModel viewmodel = new employeeViewModel();
-            viewmodel.employeeList = empRepo.GetAllEmployees();
-            //viewmodel.employee = empRepo
-            if (id != null)
+            if (Session["curEmployeeID"] == null)
             {
-                viewmodel.editemployee = empRepo.GetEmployeebyID(Convert.ToInt32(id));
+                return RedirectToAction("Login", "Employee");
+            }
+            else
+            {
+                employeeViewModel viewmodel = new employeeViewModel();
+                viewmodel.employeeList = empRepo.GetAllEmployees();
+                //viewmodel.employee = empRepo
+                if (id != null) {
+                    viewmodel.editemployee = empRepo.GetEmployeebyID(Convert.ToInt32(id));
+                    return View(viewmodel);
+                }
+
                 return View(viewmodel);
             }
-            
-            return View(viewmodel);
         }
 
         
@@ -48,30 +54,40 @@ namespace Proftaak_test.Controllers
 
        
         [HttpPost]
-        public ActionResult Create(Employee employee)
-        {
-            if (ModelState.IsValid)
+        public ActionResult Create(Employee employee) {
+            if (Session["curEmployeeID"] == null)
             {
-                empRepo.Create(employee);
+                return RedirectToAction("Login", "Employee");
             }
-            return RedirectToAction("Index");
+            else
+            {
+                if (ModelState.IsValid) {
+                    empRepo.Create(employee);
+                }
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult Update(Employee editemployee)
         {
-            if (ModelState.IsValid)
+            if (Session["curEmployeeID"] == null)
             {
-                empRepo.Update(editemployee);
+                return RedirectToAction("Login", "Employee");
             }
-            return RedirectToAction("Index");
+            else
+            {
+                if (ModelState.IsValid) {
+                    empRepo.Update(editemployee);
+                }
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]

@@ -11,12 +11,26 @@ namespace Proftaak_test.Controllers
         // GET: DriveIn
         public ActionResult Index()
         {
-            return View("Index");
+            if (Session["curEmployeeID"] == null)
+            {
+                return RedirectToAction("Login", "Employee");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         public ActionResult GetSectorForTram()
         {
-            throw new NotImplementedException();
+            if (Session["curEmployeeID"] == null)
+            {
+                return RedirectToAction("Login", "Employee");
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

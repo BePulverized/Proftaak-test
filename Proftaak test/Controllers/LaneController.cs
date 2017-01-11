@@ -11,7 +11,14 @@ namespace Proftaak_test.Controllers
         // GET: Lane
         public ActionResult Index()
         {
-            return View();
+            if (Session["curEmployeeID"] == null)
+            {
+                return RedirectToAction("Login", "Employee");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
