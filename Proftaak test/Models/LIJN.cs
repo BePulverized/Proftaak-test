@@ -11,6 +11,6 @@ namespace Proftaak_test
         public bool? ConducteurRijdtMee { get; set; }
     
         public virtual List<TramLijn> TramLijn { get; set; }
-        public virtual REMISE Remise { get; set; }
+        public virtual Remise Remise { get; set; }
     }
 }

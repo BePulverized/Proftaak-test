@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model TramOnderhoud
 
 @{
     Layout = "~/Views/_Layout.cshtml";
@@ -9,10 +9,102 @@
 <html>
 <head>
     <title>Onderhoud</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-<div>
-      
-</div>
+    <div class="panel panel-default">
+        <div class="panel-body"><span>Navigatie shizzle</span></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Repair Toevoegen</h3>
+        </div>
+        <div class="panel-body"><span>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "Please try again", new { @class = "text-danger" })
+        <div class="form-group">
+                @Html.LabelFor(model => model.TramId)
+            :
+                @Html.DropDownList("TramId")
+                @Html.ValidationMessageFor(model => model.TramId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumTijdstip) :
+                @Html.EditorFor(model => model.DatumTijdstip)
+                @Html.ValidationMessageFor(model => model.DatumTijdstip, "", new {@class = "text-danger"})
+        </div>
+        <div class="form-group">
+                @Html.LabelFor(model => model.Onderhoudstypeid) :
+                @Html.DropDownList("Onderhoudstypeid")
+                @Html.ValidationMessageFor(model => model.Onderhoudstypeid)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MedewerkerId) :
+            @Html.DropDownList("MedewerkerId")
+            @Html.ValidationMessageFor(model => model.MedewerkerId)
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+</span></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Schoonmaak Toevoegen</h3>
+        </div>
+        <div class="panel-body"><span>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "Please try again", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TramId)
+            :
+            @Html.DropDownList("TramId")
+            @Html.ValidationMessageFor(model => model.TramId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumTijdstip) :
+            @Html.EditorFor(model => model.DatumTijdstip)
+            @Html.ValidationMessageFor(model => model.DatumTijdstip, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="Onderhoudstypeid" value=1/>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OnderhoudsBeschrijving) :
+            @Html.EditorFor(model => model.OnderhoudsBeschrijving)
+            @Html.ValidationMessageFor(model => model.OnderhoudsBeschrijving, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MedewerkerId) :
+            @Html.DropDownList("MedewerkerId")
+            @Html.ValidationMessageFor(model => model.MedewerkerId)
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+</span></div>
+    </div>
 </body>
 </html>

@@ -151,6 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Contexts\GenericKeyValueContext.cs" />
+    <Compile Include="Contexts\GenericKeyValueMemoryContext.cs" />
+    <Compile Include="Contexts\IGenericKeyValueContext.cs" />
+    <Compile Include="Contexts\OnderhoudsTypeContext.cs" />
     <Compile Include="Controllers\DriveInController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\LaneController.cs" />
@@ -159,6 +163,11 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="Contexts\IMaintenanceContext.cs" />
+    <Compile Include="Contexts\MaintenanceDbContext.cs" />
+    <Compile Include="Contexts\MaintenanceMemoryContext.cs" />
+    <Compile Include="Models\GenericKeyValueModel.cs" />
+    <Compile Include="Models\OnderhoudsType.cs" />
     <Compile Include="Repository\TramRepo.cs" />
     <Compile Include="TramDBContext.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -175,7 +184,7 @@
     <Compile Include="Models\TRAM.cs" />
     <Compile Include="Models\TRAMTYPE.cs" />
     <Compile Include="Models\TRAM_LIJN.cs" />
-    <Compile Include="Models\TRAM_ONDERHOUD.cs" />
+    <Compile Include="Models\TramOnderhoud.cs" />
     <Compile Include="Models\VERBINDING.cs" />
     <Compile Include="MSSQLConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,6 +213,7 @@
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\DriveIn\Index.cshtml" />
     <Content Include="Views\Maps\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
