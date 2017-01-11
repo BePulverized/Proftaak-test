@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Proftaak_test
 {
-    internal class MSSQLConnector : IDatabaseConnector
+    public class MSSQLConnector : IDatabaseConnector
     {
         private DbConnection connection;
 

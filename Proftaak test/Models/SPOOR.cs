@@ -11,7 +11,7 @@ namespace Proftaak_test
         public bool? Beschikbaar { get; set; }
         public bool? InUitRijspoor { get; set; }
     
-        public virtual REMISE Remise { get; set; }
+        public virtual Remise Remise { get; set; }
         public virtual List<Reservering> Reserveringen { get; set; }
         public virtual List<Sector> Sectoren { get; set; }
 
