@@ -7008,6 +7008,20 @@ td.visible-print {
     margin-top: -70px;
 }
 
+.TrambeheerInfo {
+
+    margin-top: 100px;
+    margin-bottom: -255px;
+    margin-left: 700px;
+}
+
+.TrambeheerInfo h3 {
+    font: 400 12px/1.5 Helvetica, Verdana, sans-serif;
+    margin-top: -30px;
+    margin-left: 125px;
+    color:#3276b1;
+}
+
 .SectorInfo img {
     margin-bottom: 10px;
 }

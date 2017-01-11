@@ -69,5 +69,42 @@ namespace Proftaak_test
 
             return returnList;
         }
+
+        public Tram GetTrambyID(int id)
+        {
+            Tram tram = null;
+            string query = "SELECT T.ID, T.NUMMER, TT.ID, TT.OMSCHRIJVING, T.LENGTE, T.VERVUILD, T.DEFECT, T.CONDUCTEURGESCHIKT  FROM TRAM T JOIN TRAMTYPE TT ON T.TRAMTYPE_ID = TT.ID WHERE T.ID = @ID";
+            using (SqlConnection connection = DatabaseManager.Connection)
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            decimal tramid = reader.GetDecimal(0);
+                            decimal nummer = reader.GetDecimal(1);
+                            decimal typeid = reader.GetDecimal(2);
+                            string typeomschrijving = reader.GetString(3);
+                            decimal lengte = reader.GetDecimal(4);
+                            bool vervuild = reader.GetBoolean(5);
+                            bool defect = reader.GetBoolean(6);
+                            bool conducteurgeschikt = reader.GetBoolean(7);
+
+                            tram = new Tram(tramid, nummer, lengte, vervuild, defect, conducteurgeschikt, new Tramtype(typeid, typeomschrijving));
+                           
+
+
+                        }
+                    }
+                    
+                }
+
+                
+            }
+
+            return tram;
+        }
     }
 }

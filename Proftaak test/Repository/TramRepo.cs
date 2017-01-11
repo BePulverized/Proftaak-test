@@ -23,5 +23,10 @@ namespace Proftaak_test.Repository
         {
             return context.GetAllTrams();
         }
+
+        public Tram GetTrambyID(int id)
+        {
+            return context.GetTrambyID(id);
+        }
     }
 }

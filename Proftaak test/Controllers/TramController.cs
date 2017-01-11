@@ -11,6 +11,7 @@ namespace Proftaak_test.Controllers
     {
         private SectorRepo scRepo = new SectorRepo(new SectorDBContext());
         private SpoorRepo sRepo = new SpoorRepo(new SpoorDBContext());
+        private TramRepo Trepo = new TramRepo(new TramDBContext());
         // GET: Tram
         public ActionResult Index(int? id, bool? block)
         {
@@ -36,8 +37,18 @@ namespace Proftaak_test.Controllers
                 SectorViewModel viewmodel = new SectorViewModel();
                 viewmodel.SectorList = sectoren;
                 viewmodel.SpoorList = sporen;
+                viewmodel.tram = new Tram(0, 0000, 1, false, false, false, new Tramtype(0, "Geen omschrijving"));
                 return View(viewmodel);
             }
+        }
+
+        public ActionResult GetTram(int id)
+        {
+            SectorViewModel viewmodel = new SectorViewModel();
+            viewmodel.SectorList = scRepo.GetAllSectors();
+            viewmodel.SpoorList = sRepo.GetAllSporen();
+            viewmodel.tram = Trepo.GetTrambyID(id);
+            return View("Index", viewmodel);
         }
         
         public class SectorViewModel
@@ -45,6 +56,8 @@ namespace Proftaak_test.Controllers
             public List<Sector> SectorList { get; set; }
 
             public List<Spoor> SpoorList { get; set; }
+
+            public Tram tram { get; set; }
 
         }
 
