@@ -107,10 +107,10 @@ namespace Proftaak_test
                     while (reader.Read())
                     {
                         TramOnderhoud maintenance = new TramOnderhoud();
-                        maintenance.Id = reader.GetInt32(0);
+                        maintenance.Id = reader.GetDecimal(0);
                         if (!reader.IsDBNull(1))
                         {
-                            maintenance.MedewerkerId = reader.GetInt32(1);
+                            maintenance.MedewerkerId = reader.GetDecimal(1);
                         }
                         else
                         {
@@ -118,7 +118,7 @@ namespace Proftaak_test
                         }
                         if (!reader.IsDBNull(2))
                         {
-                            maintenance.TramId = reader.GetInt32(2);
+                            maintenance.TramId = reader.GetDecimal(2);
                         }
                         else
                         {
@@ -157,8 +157,8 @@ namespace Proftaak_test
                               " DatumTijdstip=@scheduledDate," +
                               " Medewerker_ID=@medewerkerId," +
                               " Tram_ID=@tramId," +
-                              " ONDERHOUDSTYPEID=@priorityId," +
-                               " WHERE Maintenance.id = @id";
+                              " ONDERHOUDSTYPEID=@priorityId" +
+                               " WHERE TRAM_ONDERHOUD.ID = @id";
             cmd.Parameters.AddWithValue("@id", maintenance.Id);
             if (maintenance.MedewerkerId != null)
             {

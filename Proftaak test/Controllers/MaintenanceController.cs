@@ -31,23 +31,8 @@ namespace Proftaak_test.Controllers
             //}
             //else
             //{
-            ViewBag.Schoonmaaks = dbContext.Maintenances
-                .Where(m => 
-                m.Onderhoudstypeid < 2 
-                && m.BeschikbaarDatum == null
-                && m.DatumTijdstip < DateTime.Now.AddHours(12));
-            ViewBag.Repairs = dbContext.Maintenances
-                .Where(m => 
-                m.Onderhoudstypeid > 1
-                && m.BeschikbaarDatum == null
-                && m.DatumTijdstip < DateTime.Now.AddHours(12));
-            ViewBag.TramId = tramDbContext.GetAllTrams().Select(t 
-               => new SelectListItem() { Text = t.Nummer.ToString(), Value = t.Id.ToString()});
-            ViewBag.Onderhoudstypeid = onderhoudsTypeContext.GetAll().Where(o => o.Id > 1).Select(s =>
-            new SelectListItem() { Text = s.Name, Value = s.Id.ToString()});
-            ViewBag.MedewerkerId = employeeRepo.GetAllEmployees().Where(sr => sr.Function.ID == 3 || sr.Function.ID == 4).Select(e =>
-                    new SelectListItem() {Text = e.SurName + " " + e.LastName, Value = e.ID.ToString()});
-                return View();
+            PopulateViewBag();
+            return View();
             //}
         }
 
@@ -66,8 +51,49 @@ namespace Proftaak_test.Controllers
             {
                 dbContext.Create(maintenance);
             }
+            PopulateViewBag();
             return View();
             //}
+        }
+
+        private void PopulateViewBag()
+        {
+            ViewBag.Schoonmaaks = dbContext.Maintenances
+                .Where(m =>
+                m.Onderhoudstypeid < 2
+                && m.BeschikbaarDatum == null
+                && m.DatumTijdstip < DateTime.Now.AddHours(12));
+            ViewBag.Repairs = dbContext.Maintenances
+                .Where(m =>
+                m.Onderhoudstypeid > 1
+                && m.BeschikbaarDatum == null
+                && m.DatumTijdstip < DateTime.Now.AddHours(12));
+            ViewBag.TramId = tramDbContext.GetAllTrams().Select(t
+               => new SelectListItem() { Text = t.Nummer.ToString(), Value = t.Id.ToString() });
+            ViewBag.Onderhoudstypeid = onderhoudsTypeContext.GetAll().Where(o => o.Id > 1).Select(s =>
+            new SelectListItem() { Text = s.Name, Value = s.Id.ToString() });
+            ViewBag.MedewerkerId = employeeRepo.GetAllEmployees().Where(sr => sr.Function.ID == 3 || sr.Function.ID == 4).Select(e =>
+                    new SelectListItem() { Text = e.SurName + " " + e.LastName, Value = e.ID.ToString() });
+        }
+
+        public ActionResult Delete(decimal id)
+        {
+            dbContext.Delete(new TramOnderhoud() { Id = id});
+            return RedirectToAction("List");
+        }
+
+        public ActionResult List()
+        {
+            var maints = dbContext.Maintenances;
+            return View(maints);
+        }
+
+        public ActionResult Complete(decimal id)
+        {
+            var maint = dbContext.Maintenances.First(m => m.Id == id);
+            maint.BeschikbaarDatum = DateTime.Now;
+         dbContext.Update(maint);   
+            return RedirectToAction("List");
         }
     }
 }

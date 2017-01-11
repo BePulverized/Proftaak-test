@@ -195,6 +195,7 @@
     <Compile Include="Models\Rights.cs" />
     <Compile Include="EmployeeDBContext.cs" />
     <Compile Include="Repository\EmployeeRepo.cs" />
+    <None Include="Views\Maintenance\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
