@@ -12,7 +12,7 @@ namespace Proftaak_test.Controllers
         private SectorRepo scRepo = new SectorRepo(new SectorDBContext());
         private SpoorRepo sRepo = new SpoorRepo(new SpoorDBContext());
         // GET: Tram
-        public ActionResult Index()
+        public ActionResult Index(int? id, bool? block)
         {
             if (Session["curEmployeeID"] == null)
             {
@@ -20,6 +20,17 @@ namespace Proftaak_test.Controllers
             }
             else
             {
+                if (id != null)
+                {
+                    if (block == false)
+                    {
+                        scRepo.BlockSector(id);
+                    }
+                    else
+                    {
+                        scRepo.UnBlockSector(id);
+                    }
+                }
                 List<Sector> sectoren = scRepo.GetAllSectors();
                 List<Spoor> sporen = sRepo.GetAllSporen();
                 SectorViewModel viewmodel = new SectorViewModel();
@@ -28,7 +39,7 @@ namespace Proftaak_test.Controllers
                 return View(viewmodel);
             }
         }
-
+        
         public class SectorViewModel
         {
             public List<Sector> SectorList { get; set; }

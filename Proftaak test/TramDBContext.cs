@@ -14,7 +14,7 @@ namespace Proftaak_test
         public Sector GetDriveInSector()
         {
             Sector returnSector = null;
-            string query = "SELECT TOP 1 SP.NUMMER, S.NUMMER FROM SECTOR S JOIN SPOOR SP ON SP.ID = S.SPOOR_ID WHERE S.BESCHIKBAAR = 1 AND SP.BESCHIKBAAR = 1 AND S.BLOKKADE = 0";
+            string query = "SELECT TOP 1 SP.NUMMER, S.NUMMER FROM SECTOR S JOIN SPOOR SP ON SP.ID = S.SPOOR_ID WHERE S.BESCHIKBAAR = 1 AND SP.BESCHIKBAAR = 1 AND S.BLOKKADE = 0 AND S.TRAM_ID IS NULL ORDER BY SP.ID ASC";
             using (SqlConnection connection = DatabaseManager.Connection) {
                  using (SqlCommand command = new SqlCommand(query, connection)) {
                     using (SqlDataReader reader = command.ExecuteReader())

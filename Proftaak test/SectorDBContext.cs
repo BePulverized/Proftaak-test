@@ -58,5 +58,54 @@ namespace Proftaak_test
 
 
         }
+
+        public void BlockSector(int? id)
+        {
+            string query = "UPDATE SECTOR SET BLOKKADE = 1 WHERE ID = @ID";
+            using (SqlConnection connection = DatabaseManager.Connection)
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+
+                }
+            }
+
+        }
+
+        public void UnBlockSector(int? id)
+        {
+            string query = "UPDATE SECTOR SET BLOKKADE = 0 WHERE ID = @ID";
+            using (SqlConnection connection = DatabaseManager.Connection)
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+
+                }
+            }
+
+        }
     }
 }
+    

@@ -18,5 +18,15 @@ namespace Proftaak_test.Repository
         {
             return context.GetAllSectors();
         }
+
+        public void BlockSector(int? id)
+        {
+            context.BlockSector(id);
+        }
+
+        public void UnBlockSector(int? id)
+        {
+            context.UnBlockSector(id);
+        }
     }
 }

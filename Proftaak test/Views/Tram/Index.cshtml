@@ -1,4 +1,5 @@
-﻿@model Proftaak_test.Controllers.TramController.SectorViewModel
+﻿@using System.Web.UI.WebControls
+@model Proftaak_test.Controllers.TramController.SectorViewModel
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
@@ -15,19 +16,47 @@
 @foreach (var item in @Model.SpoorList)
 {
     <div class="Spoor">
-        <button type="button">@item.Nummer</button>
+        
+        <p>Spoor: @item.Nummer</p>
     </div>
     foreach (Sector sector in @Model.SectorList)
     {
         if (sector.SpoorId == item.Id)
         {
-            <div>
-                <button type="button">@sector.Nummer</button>
-            </div>
+            if (sector.Blokkade == false)
+            {
+                if (sector.Tram != null)
+                {
+                    <div class=Sector>
+                        @Html.ActionLink(Convert.ToString("Tram: " + sector.Tram.Nummer), "Index", "Tram", new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                    </div>
+                }
+                else
+                {
+                    <div class=Sector>
+                        @Html.ActionLink(Convert.ToString(@sector.Nummer), "Index", "Tram", new {id = sector.Id, block = sector.Blokkade}, new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                    </div>
+                }
+            }
+            else
+            {
+                if (sector.Tram != null)
+                {
+                    <div class=Sector>
+                        @Html.ActionLink(Convert.ToString("Tram: " + sector.Tram.Nummer), "Index", "Tram", new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                    </div>
+                }
+                else
+                {
+                    <div class=Sector>
+                        @Html.ActionLink("BLOCKED", "Index", "Tram", new {id = sector.Id, block = sector.Blokkade}, new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                    </div>
+                }
+            }
         }
     }
 }
-</div>
+    </div>
 </body>
 </html>
 

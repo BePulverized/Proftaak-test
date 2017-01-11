@@ -6976,14 +6976,30 @@ td.visible-print {
     box-sizing: border-box;
 }
 
+.Sector {
+    margin-right: -2px;
+    display: inline-block;
+    }
+
+
+
+
+
 .trambeheer {
     margin-top: 100px;
+    
+    
 }
 
-.Spoor {
-    margin: 40, 40;
-    float: left;
-    
+.Spoor p {
+    padding: 8px 8px;
+    padding-right: 80px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .SectorInfo .SectorInfoText {
