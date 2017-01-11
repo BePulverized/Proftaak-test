@@ -23,5 +23,15 @@ namespace Proftaak_test
             Tram = tram;
             Nummer = nummer;
         }
+
+        public Sector(decimal id, decimal? nummer, decimal spoorid, Tram tram, bool beschikbaar, bool blokkade)
+        {
+            Id = id;
+            SpoorId = spoorid;
+            Tram = tram;
+            Nummer = nummer;
+            Beschikbaar = beschikbaar;
+            Blokkade = blokkade;
+        }
     }
 }

@@ -20,5 +20,14 @@ namespace Proftaak_test
             Nummer = nummer;
             
         }
+
+        public Spoor(decimal id, decimal nummer, int lengte, bool beschikbaar, bool inuitrijspoor)
+        {
+            Id = id;
+            Nummer = nummer;
+            Lengte = lengte;
+            Beschikbaar = beschikbaar;
+            InUitRijspoor = inuitrijspoor;
+        }
     }
 }
