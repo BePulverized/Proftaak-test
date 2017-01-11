@@ -14,5 +14,11 @@ namespace Proftaak_test
         public virtual REMISE Remise { get; set; }
         public virtual List<Reservering> Reserveringen { get; set; }
         public virtual List<Sector> Sectoren { get; set; }
+
+        public Spoor(decimal? nummer)
+        {
+            Nummer = nummer;
+            
+        }
     }
 }

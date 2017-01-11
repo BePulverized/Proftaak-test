@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model dynamic
+@model Proftaak_test.Controllers.DriveInController.TramViewModel
 
 @{
     Layout = "~/Views/_Layout.cshtml";
@@ -18,7 +18,7 @@
         @using (Html.BeginForm("GetSectorForTram", "DriveIn", FormMethod.Post, new { @class = "TramInsert" }))
         {
 
-            @Html.TextBox("Tram 2020", "", new { style = "width:100%" })
+            @Html.DropDownList("Trams", new SelectList(@Model.TramList, "Id", "Nummer"),"Selecteer tram", new { style = "width:220px; margin-bottom:10px; " })
 
             <input type="submit" value="Info" />
         }
@@ -27,13 +27,13 @@
     <div class="SpoorInfo">
         <img src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/rounded-glossy-black-icons-signs/095437-rounded-glossy-black-icon-signs-railroad-tracks.png" width="100px" height="100px" />
         <div class="SpoorInfoText">
-            <p>SPOOR 20</p>
+            <p>@Model.sector.Spoor.Nummer</p>
         </div>
     </div>
     <div class="SectorInfo">
         <img src="https://cdn0.iconfinder.com/data/icons/huge-basic-icons-part-2/512/Radar.png" width="100px" height="80px" />
         <div class="SectorInfoText">
-            <p>SECTOR 3</p>
+            <p>@Model.sector.Nummer</p>
         </div>
     </div>
 </body>

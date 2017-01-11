@@ -158,6 +158,8 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="Repository\TramRepo.cs" />
+    <Compile Include="TramDBContext.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Global.asax.cs">

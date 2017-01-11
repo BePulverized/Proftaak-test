@@ -20,5 +20,16 @@ namespace Proftaak_test
         public virtual List<TramLijn> TramLijnen { get; set; }
         public virtual List<TramOnderhoud> TramOnderhouds { get; set; }
         public virtual Tramtype Tramtype { get; set; }
+
+        public Tram(decimal id, decimal? nummer, decimal? lengte, bool? vervuild, bool? defect, bool? conducteurGeschikt, Tramtype tramtype)
+        {
+            Id = id;
+            Nummer = nummer;
+            Lengte = lengte;
+            Vervuild = vervuild;
+            Defect = defect;
+            ConducteurGeschikt = conducteurGeschikt;
+            Tramtype = tramtype;
+        }
     }
 }
