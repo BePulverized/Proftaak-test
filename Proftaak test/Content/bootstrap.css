@@ -6976,20 +6976,50 @@ td.visible-print {
     box-sizing: border-box;
 }
 
+.Sector {
+    margin-right: -2px;
+    display: inline-block;
+    }
+
+
+
+
+
 .trambeheer {
     margin-top: 100px;
+    
+    
 }
 
-.Spoor {
-    margin: 40, 40;
-    float: left;
-    
+.Spoor p {
+    padding: 8px 8px;
+    padding-right: 80px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .SectorInfo .SectorInfoText {
     font: 400 30px/1.5 Helvetica, Verdana, sans-serif;
     margin-left: 200px;
     margin-top: -70px;
+}
+
+.TrambeheerInfo {
+
+    margin-top: 100px;
+    margin-bottom: -255px;
+    margin-left: 700px;
+}
+
+.TrambeheerInfo h3 {
+    font: 400 12px/1.5 Helvetica, Verdana, sans-serif;
+    margin-top: -30px;
+    margin-left: 125px;
+    color:#3276b1;
 }
 
 .SectorInfo img {

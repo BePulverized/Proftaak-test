@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Web.Script.Serialization
+@model Proftaak_test.Controllers.TramController.SectorViewModel
+@{
     Layout = "~/Views/_Layout.cshtml";
 }
 @{
@@ -9,17 +11,52 @@
 
 <div id="map" style="height: 800px; width: 100%;"></div>
 <script>
-      function initMap() {
-          var uluru = { lat: 52.348290, lng: 4.852468 };
+    var icons = {
+        tram: {
+            icon: '@Html.Raw(Request.Url.Scheme + "://" + Request.Url.Authority + Url.Content("~/Content/tram.png"))'
+        },
+        sector: {
+            icon: '@Html.Raw(Request.Url.Scheme + "://" + Request.Url.Authority + Url.Content("~/Content/sector.png"))'
+        }
+    };
+    function initMap() {
+        var uluru = { lat: 52.349025, lng: 4.853057 };
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 18,
-          center: uluru
+            zoom: 20,
+            center: uluru
         });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
+        @foreach (var item in @Model.SectorList)
+        {
+            if (item.Tram != null)
+            {
+                @:var contentString = '<div><b>Tram:</b> @item.Tram.Nummer.ToString()</div>';
+            }
+            else
+            {
+                @:var contentString = '<div><b>Sector:</b> @item.Nummer.ToString()</div>';
+            }
+            @:var @Html.Raw("infowindow" + item.Id) = new google.maps.InfoWindow({
+            @:    content: contentString
+            @:});
+
+            @:var @Html.Raw("marker" + item.Id) = new google.maps.Marker({
+                @:position: { lat: @item.Latitude.ToString().Replace(',', '.'), lng: @item.Longitude.ToString().Replace(',', '.') },
+            if (item.Tram != null)
+            {
+                @:icon: icons.tram.icon,
+            }
+            else
+            {
+                @:icon: icons.sector.icon,
+            }
+                @:title: 'TestTitle',
+                @:map: map
+            @:});
+            @Html.Raw("marker" + item.Id)@:.addListener('click', function() {
+            @Html.Raw("infowindow" + item.Id)@:.open(map, @Html.Raw("marker" + item.Id));
+            @:});
+        }
+    }
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxSl9yvRls7yH8CAoNSRhnRbAtLE0PE44&callback=initMap">

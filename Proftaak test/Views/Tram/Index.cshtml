@@ -1,4 +1,5 @@
-﻿@model Proftaak_test.Controllers.TramController.SectorViewModel
+﻿@using System.Web.UI.WebControls
+@model Proftaak_test.Controllers.TramController.SectorViewModel
 @{
     Layout = "~/Views/_Layout.cshtml";
 }
@@ -11,23 +12,69 @@
     <title>Trams</title>
 </head>
 <body>
-<div class="trambeheer">
-@foreach (var item in @Model.SpoorList)
-{
-    <div class="Spoor">
-        <button type="button">@item.Nummer</button>
-    </div>
-    foreach (Sector sector in @Model.SectorList)
+<div class="TrambeheerInfo">
+    @if (Model.tram.Id == 0)
     {
-        if (sector.SpoorId == item.Id)
+        <h2>Traminfo</h2>
+        <h3>(Selecteer een tram:)</h3>
+    }
+    else
+    {
+        <h2>Traminfo</h2>
+    }
+    <p>Tramnummer: @Model.tram.Nummer</p>
+    <p>Lengte: @Model.tram.Lengte</p>
+    <p>Vervuild: @Model.tram.Vervuild</p>
+    <p>Conducteur:@Model.tram.ConducteurGeschikt</p>
+</div>
+<div class="trambeheer">
+    <h2>Sporen</h2>
+    @foreach (var item in @Model.SpoorList)
+    {
+        <div class="Spoor">
+
+            <p>Spoor: @item.Nummer</p>
+        </div>
+        foreach (Sector sector in @Model.SectorList)
         {
-            <div>
-                <button type="button">@sector.Nummer</button>
-            </div>
+            if (sector.SpoorId == item.Id)
+            {
+                if (sector.Blokkade == false)
+                {
+                    if (sector.Tram != null)
+                    {
+                        <div class=Sector>
+                            @Html.ActionLink(Convert.ToString("Tram: " + sector.Tram.Nummer), "GetTram", "Tram", new {id = sector.Tram.Id}, new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                        </div>
+                    }
+                    else
+                    {
+                        <div class=Sector>
+                            @Html.ActionLink(Convert.ToString(@sector.Nummer), "Index", "Tram", new {id = sector.Id, block = sector.Blokkade}, new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                        </div>
+                    }
+                }
+                else
+                {
+                    if (sector.Tram != null)
+                    {
+                        <div class=Sector>
+                            @Html.ActionLink(Convert.ToString("Tram: " + sector.Tram.Nummer), "GetTram", "Tram", new {id = sector.Tram.Id}, new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                        </div>
+                    }
+                    else
+                    {
+                        <div class=Sector>
+                            @Html.ActionLink("BLOCKED", "Index", "Tram", new {id = sector.Id, block = sector.Blokkade}, new {style = "width:50px; background-color: #3276b1; color: white; padding: 3px 3px;border: none; border-radius: 4px; cursor: pointer; font-size: 20px; "})
+                        </div>
+                    }
+                }
+            }
         }
     }
-}
 </div>
+
+
 </body>
 </html>
 
