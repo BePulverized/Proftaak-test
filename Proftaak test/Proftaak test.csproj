@@ -146,6 +146,11 @@
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -163,6 +168,7 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="Enumerations\SortMode.cs" />
     <Compile Include="Repository\SpoorRepo.cs" />
     <Compile Include="SpoorDBContext.cs" />
     <Compile Include="SectorDBContext.cs" />
@@ -219,6 +225,8 @@
     <Content Include="Views\DriveIn\Index.cshtml" />
     <Content Include="Views\Maps\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Maintenance\MyList.cshtml" />
+    <Content Include="Views\Maintenance\PrintList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Proftaak_test.TramOnderhoud>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintList</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MedewerkerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TramId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumTijdstip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Onderhoudstypenaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnderhoudsBeschrijving)
+            </th>
+            <th>Completed?</th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.SurName) @Html.DisplayFor(modelItem => item.Employee.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tram.Nummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumTijdstip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Onderhoudstypenaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OnderhoudsBeschrijving)
+            </td>
+            <td>
+                | O |
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

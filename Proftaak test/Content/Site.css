@@ -20,8 +20,17 @@ textarea {
   display:inline-block;
   margin:5px;
   margin-top: 50px;
+    min-width: 280px;
+    vertical-align: top;
+}
+.panel-body {
+    padding: 20px;
+}
+.editor-field {
+    display: inline;
 }
 
 table {
     margin-top: 50px;
+    display: inline;
 }

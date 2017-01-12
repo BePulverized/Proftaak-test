@@ -15,21 +15,26 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-    <div class="panel panel-default">
-        <div class="panel-body"><span>@Html.ActionLink("Maintenance Lijst", "List")
-            @Html.ActionLink("Maintenance Toevoegen", "Index")</span></div>
+<div class="panel">
+<div class="panel panel-default">
+    <div class="panel-body"><span>
+                                @Html.ActionLink("Mijn Dagtaken", "MyList") <br />
+@Html.ActionLink("Maintenance Lijst", "List") <br/>
+                                @Html.ActionLink("Print Lijst", "PrintList") <br />
+            @Html.ActionLink("Maintenance Toevoegen", "Index")
+</span></div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Repair Toevoegen</h3>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Repair Toevoegen</h3>
-        </div>
-        <div class="panel-body"><span>
+    <div class="panel-body"><span>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.ValidationSummary(true, "Please try again", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "Please try again", new {@class = "text-danger"})
         <div class="form-group">
                 @Html.LabelFor(model => model.TramId)
             :
@@ -61,18 +66,18 @@
     </div>
 }
 </span></div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Schoonmaak Toevoegen</h3>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Schoonmaak Toevoegen</h3>
-        </div>
-        <div class="panel-body"><span>
+    <div class="panel-body"><span>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.ValidationSummary(true, "Please try again", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "Please try again", new {@class = "text-danger"})
         <div class="form-group">
             @Html.LabelFor(model => model.TramId)
             :
@@ -83,15 +88,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DatumTijdstip) :
             @Html.EditorFor(model => model.DatumTijdstip)
-            @Html.ValidationMessageFor(model => model.DatumTijdstip, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.DatumTijdstip, "", new {@class = "text-danger"})
         </div>
         <div class="form-group">
-            <input type="hidden" name="Onderhoudstypeid" value=1/>
+            <input type="hidden" name="Onderhoudstypeid" value="1"/>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.OnderhoudsBeschrijving) :
             @Html.EditorFor(model => model.OnderhoudsBeschrijving)
-            @Html.ValidationMessageFor(model => model.OnderhoudsBeschrijving, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.OnderhoudsBeschrijving, "", new {@class = "text-danger"})
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.MedewerkerId) :
@@ -106,6 +111,7 @@
     </div>
 }
 </span></div>
+</div>
     </div>
 </body>
 </html>

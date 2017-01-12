@@ -1,0 +1,89 @@
+﻿@using Proftaak_test.Enumerations
+@model IEnumerable<TramOnderhoud>
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>Onderhoud</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="panel">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span>
+                    @Html.ActionLink("Mijn Dagtaken", "MyList") <br />
+                    @Html.ActionLink("Maintenance Lijst", "List") <br />
+                    @Html.ActionLink("Print Lijst", "PrintList") <br />
+                    @Html.ActionLink("Maintenance Toevoegen", "Index")
+                </span>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.DatumTijdstip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BeschikbaarDatum)
+                </th>
+                <th>
+                    Onderhoudssoort
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OnderhoudsBeschrijving)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TramId)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatumTijdstip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BeschikbaarDatum)
+                    </td>
+                    <td>
+                        @if (item.Onderhoudstypeid == 1)
+                        {
+                            <p>Schoonmaak</p>
+                        }
+                        else
+                        {
+                            <p>Reparatie - @item.OnderhoudsBeschrijving</p>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Onderhoudstypeid == 1)
+                        {
+                            @: @Html.DisplayFor(modelItem => item.OnderhoudsBeschrijving)
+                    }
+                        else
+                        {
+                            <p>Niet van toepassing</p>
+                        }
+                    </td>
+                    <td>
+                        @item.Tram.Nummer.GetValueOrDefault()
+                    </td>
+                    <td>
+                        @Html.ActionLink("Complete", "Complete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>

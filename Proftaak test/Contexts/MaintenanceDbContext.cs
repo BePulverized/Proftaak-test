@@ -43,8 +43,8 @@ namespace Proftaak_test
         {
             Maintenances.Add(maintenance);
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "INSERT INTO TRAM_ONDERHOUD (BeschikbaarDatum, DatumTijdstip, Tram_ID, ONDERHOUDSTYPEID, Medewerker_ID)" +
-                              " VALUES(@maintainedDate, @scheduledDate, @tramId, @priorityId, @employeeId)";
+            cmd.CommandText = "INSERT INTO TRAM_ONDERHOUD (BeschikbaarDatum, DatumTijdstip, Tram_ID, ONDERHOUDSTYPEID, Medewerker_ID, [OnderhoudsBeschrijving])" +
+                              " VALUES(@maintainedDate, @scheduledDate, @tramId, @priorityId, @employeeId, @beschrijving)";
             if (maintenance.BeschikbaarDatum != null)
             {
                 cmd.Parameters.AddWithValue("@maintainedDate", maintenance.BeschikbaarDatum);
@@ -79,6 +79,14 @@ namespace Proftaak_test
             else
             {
                 cmd.Parameters.AddWithValue("@employeeId", DBNull.Value);
+            }
+            if (maintenance.OnderhoudsBeschrijving != null)
+            {
+                cmd.Parameters.AddWithValue("@beschrijving", maintenance.OnderhoudsBeschrijving);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@beschrijving", DBNull.Value);
             }
             DatabaseManager.connector.NonQuery(cmd);
         }
@@ -141,6 +149,14 @@ namespace Proftaak_test
                             maintenance.BeschikbaarDatum = null;
                         }
                         maintenance.Onderhoudstypeid = reader.GetInt32(5);
+                        if (!reader.IsDBNull(6))
+                        {
+                            maintenance.OnderhoudsBeschrijving = reader.GetString(6);
+                        }
+                        else
+                        {
+                            maintenance.OnderhoudsBeschrijving = null;
+                        }
                         Maintenances.Add(maintenance);
                     }
                 }
@@ -158,6 +174,7 @@ namespace Proftaak_test
                               " Medewerker_ID=@medewerkerId," +
                               " Tram_ID=@tramId," +
                               " ONDERHOUDSTYPEID=@priorityId" +
+                              " [OnderhoudsBeschrijving]=@beschrijving" +
                                " WHERE TRAM_ONDERHOUD.ID = @id";
             cmd.Parameters.AddWithValue("@id", maintenance.Id);
             if (maintenance.MedewerkerId != null)
@@ -191,6 +208,14 @@ namespace Proftaak_test
             else
             {
                 cmd.Parameters.AddWithValue("@maintainedDate", DBNull.Value);
+            }
+            if (maintenance.OnderhoudsBeschrijving != null)
+            {
+                cmd.Parameters.AddWithValue("@beschrijving", maintenance.OnderhoudsBeschrijving);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@beschrijving", DBNull.Value);
             }
             cmd.Parameters.AddWithValue("@priorityId", maintenance.Onderhoudstypeid);
             DatabaseManager.connector.NonQuery(cmd);

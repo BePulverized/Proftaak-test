@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Proftaak_test.Contexts;
+using Proftaak_test.Enumerations;
 using Proftaak_test.Repository;
 
 namespace Proftaak_test.Controllers
@@ -82,9 +83,70 @@ namespace Proftaak_test.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult List()
+        [HttpGet]
+        public ActionResult List(SortMode sort = SortMode.Default)
         {
+            ViewBag.SortMode = sort;
+            dbContext.Maintenances.ForEach(t => 
+            t.Employee = employeeRepo.GetEmployeebyID(Convert.ToInt32(t.MedewerkerId.GetValueOrDefault())));
+            dbContext.Maintenances.ForEach(t =>
+                    t.Tram = tramDbContext.GetAllTrams().First(tram => tram.Id == t.TramId.GetValueOrDefault()));
             var maints = dbContext.Maintenances;
+            if (sort == SortMode.DateFinishedAsc)
+            {
+                maints =
+                    dbContext.Maintenances.Where(m => m.BeschikbaarDatum != null)
+                        .OrderBy(m => m.BeschikbaarDatum.Value)
+                        .ToList();
+                maints.AddRange(dbContext.Maintenances.Where(m => m.BeschikbaarDatum == null));
+            }
+            else if (sort == SortMode.DateFinishedDesc)
+            {
+                maints = dbContext.Maintenances.Where(m => m.BeschikbaarDatum == null).ToList();
+                maints.AddRange(dbContext.Maintenances.Where(m => m.BeschikbaarDatum != null)
+        .OrderByDescending(m => m.BeschikbaarDatum.Value)
+        .ToList());
+            } else if (sort == SortMode.DateStartedAsc)
+            {
+                maints =
+    dbContext.Maintenances.Where(m => m.DatumTijdstip != null)
+        .OrderBy(m => m.DatumTijdstip.Value)
+        .ToList();
+                maints.AddRange(dbContext.Maintenances.Where(m => m.DatumTijdstip == null));
+            } else if (sort == SortMode.DateStartedDesc)
+            {
+                maints = dbContext.Maintenances.Where(m => m.DatumTijdstip == null).ToList();
+                maints.AddRange(dbContext.Maintenances.Where(m => m.DatumTijdstip != null)
+        .OrderByDescending(m => m.DatumTijdstip.Value)
+        .ToList());
+            } else if (sort == SortMode.Type)
+            {
+                maints = maints.OrderBy(m => m.Onderhoudstypeid).ToList();
+            }
+            return View(maints);
+        }
+
+        public ActionResult PrintList()
+        {
+            dbContext.Maintenances.ForEach(t =>
+            t.Employee = employeeRepo.GetEmployeebyID(Convert.ToInt32(t.MedewerkerId.GetValueOrDefault())));
+            dbContext.Maintenances.ForEach(t =>
+                    t.Tram = tramDbContext.GetAllTrams().First(tram => tram.Id == t.TramId.GetValueOrDefault()));
+            var maints = dbContext.Maintenances
+                .Where(m =>
+                    m.BeschikbaarDatum == null
+                    && m.DatumTijdstip < DateTime.Now.AddHours(12));
+            return View(maints);
+        }
+        public ActionResult MyList()
+        {
+            if (Session["curEmployeeID"] == null)
+            {
+                return RedirectToAction("Login", "Employee");
+            }
+            var maints =
+                dbContext.Maintenances.Where(
+                    m => m.MedewerkerId != null && m.MedewerkerId == Convert.ToInt32(Session["curEmployeeID"]) && m.BeschikbaarDatum == null && m.BeschikbaarDatum < DateTime.Now.AddHours(12)).OrderBy(s => s.Onderhoudstypeid);
             return View(maints);
         }
 

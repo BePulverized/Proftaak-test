@@ -23,6 +23,7 @@ namespace Proftaak_test
         [Required]
         [Display(Name = "Reparatie soort")]
         public int Onderhoudstypeid { get; set; }
+        public string Onderhoudstypenaam { get; set; } // purely for a view..
 
         [Display(Name="Beschrijving")]
         [StringLength(245, ErrorMessage = "Please fill in a description under {0} characters")]

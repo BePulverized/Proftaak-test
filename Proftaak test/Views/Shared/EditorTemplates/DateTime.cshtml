@@ -3,12 +3,15 @@
     @Html.Label("")
 </div>*@
 <div class="editor-field">
-    @Html.TextBox("", String.Format("{0:dd/MM/yyyy}", (Model == DateTime.MinValue) ? null : Model), new { @class = "" })
+    @{
+        Guid guid = Guid.NewGuid();
+    }
+    @Html.TextBox("", String.Format("{0:dd/MM/yyyy}", (Model == DateTime.MinValue) ? null : Model), new {@class = "", @id = @guid})
 </div>
 @*THIS PICKER REQUIRES JQUERY. PLS INCLUDE. ALSO UI.*@
 <script type="text/javascript">
     $(document).ready(function () {
-        $("[id=@ViewData.ModelMetadata.PropertyName]").datepicker({
+        $("[id=@guid]").datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: 'dd/mm/yy',

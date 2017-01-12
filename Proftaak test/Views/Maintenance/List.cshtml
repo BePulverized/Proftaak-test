@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TramOnderhoud>
+﻿@using Proftaak_test.Enumerations
+@model IEnumerable<TramOnderhoud>
 
     @{
     Layout = "~/Views/_Layout.cshtml";
@@ -13,24 +14,46 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     <body>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <span>
-                    @Html.ActionLink("Maintenance Lijst", "List")
+    <div class="panel">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <span>
+                @Html.ActionLink("Mijn Dagtaken", "MyList") <br />
+                    @Html.ActionLink("Maintenance Lijst", "List") <br />
                     @Html.ActionLink("Maintenance Toevoegen", "Index")
-                </span>
-            </div>
+            </span>
         </div>
+    </div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DatumTijdstip)
+                @{
+                    var sortDTString = "^";
+                    var newDTSortMode = SortMode.DateStartedAsc;
+                }
+
+                @if (((SortMode)ViewBag.SortMode) == SortMode.DateStartedAsc)
+                {
+                    sortDTString = "v";
+                    newDTSortMode = SortMode.DateStartedDesc;
+                }
+                @Html.DisplayNameFor(model => model.DatumTijdstip) @Html.ActionLink(sortDTString, "List", new { sort = newDTSortMode })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BeschikbaarDatum)
+                @{
+                    var sortDFString = "^";
+                    var newDFSortMode = SortMode.DateFinishedAsc;
+                }
+
+                @if (((SortMode)ViewBag.SortMode) == SortMode.DateFinishedAsc)
+    {
+        sortDFString = "v";
+        newDFSortMode = SortMode.DateFinishedDesc;
+    }
+                @Html.DisplayNameFor(model => model.BeschikbaarDatum) @Html.ActionLink(sortDFString, "List", new { sort = newDFSortMode })
             </th>
             <th>
-                Onderhoudssoort
+                Onderhoudssoort @Html.ActionLink("+", "List", new { sort = SortMode.Type })
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OnderhoudsBeschrijving)
@@ -57,13 +80,13 @@
                     }
                     else
                     {
-                        <p>Reparatie</p>
+                        <p>Reparatie - @item.OnderhoudsBeschrijving</p>
                     }
                 </td>
                 <td>
                     @if (item.Onderhoudstypeid == 1)
                     {
-                        <p>@item.OnderhoudsBeschrijving</p>
+                       @: @Html.DisplayFor(modelItem => item.OnderhoudsBeschrijving)
                     }
                     else
                     {
@@ -71,7 +94,7 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TramId)
+                    @item.Tram.Nummer.GetValueOrDefault()
                 </td>
                 <td>
                     @Html.ActionLink("Complete", "Complete", new {id = item.Id}) |
@@ -81,4 +104,5 @@
         }
 
     </table>
+        </div>
     </body>
