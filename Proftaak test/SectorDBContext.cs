@@ -16,7 +16,7 @@ namespace Proftaak_test
             List<Sector> returnList = new List<Sector>();
 
             string query =
-                "SELECT S.ID, S.SPOOR_ID, T.ID, T.NUMMER, TT.ID, TT.OMSCHRIJVING, T.LENGTE, T.VERVUILD, T.DEFECT, T.CONDUCTEURGESCHIKT, S.NUMMER, S.BESCHIKBAAR, S.BLOKKADE FROM SECTOR S left JOIN TRAM T ON S.TRAM_ID = T.ID left JOIN TRAMTYPE TT ON T.TRAMTYPE_ID = TT.ID";
+                "SELECT S.ID, S.SPOOR_ID, T.ID, T.NUMMER, TT.ID, TT.OMSCHRIJVING, T.LENGTE, T.VERVUILD, T.DEFECT, T.CONDUCTEURGESCHIKT, S.NUMMER, S.BESCHIKBAAR, S.BLOKKADE, COALESCE(S.LATITUDE, 0), COALESCE(S.LONGITUDE, 0) FROM SECTOR S left JOIN TRAM T ON S.TRAM_ID = T.ID left JOIN TRAMTYPE TT ON T.TRAMTYPE_ID = TT.ID";
             using (SqlConnection connection = DatabaseManager.Connection)
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -25,6 +25,8 @@ namespace Proftaak_test
                     {
                         while (reader.Read())
                         {
+                            decimal latitude = 0;
+                            decimal longitude = 0;
                             decimal sectorid = reader.GetDecimal(0);
                             decimal spoorid = reader.GetDecimal(1);
                             Tram tram = null;
@@ -46,8 +48,11 @@ namespace Proftaak_test
                             bool sectorbeschikbaar = reader.GetBoolean(11);
                             bool sectorblokkade = reader.GetBoolean(12);
 
+                            latitude = reader.GetDecimal(13);
+                            longitude = reader.GetDecimal(14);
+
                             Sector sector = new Sector(sectorid, sectornummer, spoorid,
-                                tram, sectorbeschikbaar, sectorblokkade);
+                                tram, sectorbeschikbaar, sectorblokkade, latitude, longitude);
 
                             returnList.Add(sector);
                         }

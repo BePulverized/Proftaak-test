@@ -11,6 +11,9 @@ namespace Proftaak_test
         public decimal? Nummer { get; set; }
         public bool? Beschikbaar { get; set; }
         public bool? Blokkade { get; set; }
+
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
     
         public virtual List<Verbinding> Verbindingen { get; set; }
         public virtual List<Verbinding> Verbindingen1 { get; set; }
@@ -32,6 +35,17 @@ namespace Proftaak_test
             Nummer = nummer;
             Beschikbaar = beschikbaar;
             Blokkade = blokkade;
+        }
+
+        public Sector(decimal id, decimal? nummer, decimal spoorid, Tram tram, bool beschikbaar, bool blokkade, decimal latitude, decimal longitude) {
+            Id = id;
+            SpoorId = spoorid;
+            Tram = tram;
+            Nummer = nummer;
+            Beschikbaar = beschikbaar;
+            Blokkade = blokkade;
+            Latitude = latitude;
+            Longitude = longitude;
         }
     }
 }
