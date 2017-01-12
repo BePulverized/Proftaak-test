@@ -90,6 +90,8 @@ namespace Proftaak_test.Controllers
             dbContext.Maintenances.ForEach(t => 
             t.Employee = employeeRepo.GetEmployeebyID(Convert.ToInt32(t.MedewerkerId.GetValueOrDefault())));
             dbContext.Maintenances.ForEach(t =>
+t.Onderhoudstypenaam = onderhoudsTypeContext.GenericKeyValues.FirstOrDefault(o => o.Id == t.Onderhoudstypeid).Name);
+            dbContext.Maintenances.ForEach(t =>
                     t.Tram = tramDbContext.GetAllTrams().First(tram => tram.Id == t.TramId.GetValueOrDefault()));
             var maints = dbContext.Maintenances;
             if (sort == SortMode.DateFinishedAsc)
@@ -131,6 +133,8 @@ namespace Proftaak_test.Controllers
             dbContext.Maintenances.ForEach(t =>
             t.Employee = employeeRepo.GetEmployeebyID(Convert.ToInt32(t.MedewerkerId.GetValueOrDefault())));
             dbContext.Maintenances.ForEach(t =>
+t.Onderhoudstypenaam = onderhoudsTypeContext.GenericKeyValues.FirstOrDefault(o => o.Id == t.Onderhoudstypeid).Name);
+            dbContext.Maintenances.ForEach(t =>
                     t.Tram = tramDbContext.GetAllTrams().First(tram => tram.Id == t.TramId.GetValueOrDefault()));
             var maints = dbContext.Maintenances
                 .Where(m =>
@@ -144,6 +148,8 @@ namespace Proftaak_test.Controllers
             {
                 return RedirectToAction("Login", "Employee");
             }
+            dbContext.Maintenances.ForEach(t =>
+t.Onderhoudstypenaam = onderhoudsTypeContext.GenericKeyValues.FirstOrDefault(o => o.Id == t.Onderhoudstypeid).Name);
             var maints =
                 dbContext.Maintenances.Where(
                     m => m.MedewerkerId != null && m.MedewerkerId == Convert.ToInt32(Session["curEmployeeID"]) && m.BeschikbaarDatum == null && m.BeschikbaarDatum < DateTime.Now.AddHours(12)).OrderBy(s => s.Onderhoudstypeid);

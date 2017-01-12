@@ -145,6 +145,7 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\ICTRailsAspWorking - Web Deploy.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -203,7 +204,6 @@
     <Compile Include="Models\Rights.cs" />
     <Compile Include="EmployeeDBContext.cs" />
     <Compile Include="Repository\EmployeeRepo.cs" />
-    <None Include="Views\Maintenance\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -229,6 +229,7 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Maintenance\MyList.cshtml" />
     <Content Include="Views\Maintenance\PrintList.cshtml" />
+    <Content Include="Views\Maintenance\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
